@@ -1,0 +1,4 @@
+2020-07-19 15:57:45,662 INFO c.m.l.ServletInitializer [main] Starting ServletInitializer v0.0.1-SNAPSHOT on localhost with PID 70559 (/Users/e3j7qfx/Softwares/tomcat-9/webapps/7890/WEB-INF/classes started by e3j7qfx in /Users/e3j7qfx/Codebase/Personal/UDEMY/loginsvc)
+2020-07-19 15:57:45,677 DEBUG c.m.l.ServletInitializer [main] Running with Spring Boot v2.2.6.RELEASE, Spring v5.2.5.RELEASE
+2020-07-19 15:57:45,679 INFO c.m.l.ServletInitializer [main] No active profile set, falling back to default profiles: default
+2020-07-19 15:57:48,039 INFO c.m.l.ServletInitializer [main] Started ServletInitializer in 2.93 seconds (JVM running for 7.333)
