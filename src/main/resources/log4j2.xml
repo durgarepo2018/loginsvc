@@ -11,9 +11,9 @@
         </File>
     </Appenders>
     <Loggers>
-        <Logger name="com.mckesson.loyalty" level="debug" additivity="false">
+        <Logger name="com.mckesson.inferno.loginsvc" level="debug" additivity="false">
             <AppenderRef ref="LogToFile"/>
-             <AppenderRef ref="LogToConsole"/>          
+             <AppenderRef ref="LogToConsole"/>        
         </Logger>
         
     </Loggers>
