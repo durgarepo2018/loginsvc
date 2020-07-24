@@ -21,4 +21,14 @@ public class LoginSvcUtility {
 			return false;
 		}
 	}
+	
+	public static boolean isValidAuthRequest(User userRequest) {
+		if(userRequest != null 
+				&& userRequest.getUserName() != null && userRequest.getUserName().trim().length() > 0
+				&& userRequest.getPassword() != null && userRequest.getPassword().trim().length() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
