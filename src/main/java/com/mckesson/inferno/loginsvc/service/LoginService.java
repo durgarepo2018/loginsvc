@@ -17,6 +17,7 @@ import com.mckesson.inferno.loginsvc.exception.InvalidInputException;
 import com.mckesson.inferno.loginsvc.model.User;
 import com.mckesson.inferno.loginsvc.reposetry.UserReposetry;
 import com.mckesson.inferno.loginsvc.response.AuthenticationResponse;
+import com.mckesson.inferno.loginsvc.response.AuthentivationRequest;
 import com.mckesson.inferno.loginsvc.util.LoginSvcUtility;
 import com.mckesson.inferno.loginsvc.util.LoginSvcUtility.UserRole;
 
@@ -54,7 +55,6 @@ public class LoginService {
 		if(LoginSvcUtility.isValidAddUserRequest(userRequest)) {
 			
 			boolean isValidUserRole = false;
-			
 			for (UserRole userRole : UserRole.values()) { 
 				
 				if(userRole.toString().equalsIgnoreCase(userRequest.getUserRole())) {
@@ -89,7 +89,7 @@ public class LoginService {
 	}
 
 	@PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> authenticateUser(@RequestBody User authRequest) {
+    public ResponseEntity<AuthenticationResponse> authenticateUser(@RequestBody AuthentivationRequest authRequest) {
 
 		logger.info("authenticateUser :Start");
 		logger.info(" Request Data  :"+authRequest);
@@ -122,7 +122,7 @@ public class LoginService {
 			    	 return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 			    }
 			   // logger.info(" Auth Response Data  :"+userDetails);
-			    
+			   
 				 
 			 } catch (Exception e) {
 				logger.debug("Exception at AddUser :"+e.getMessage());

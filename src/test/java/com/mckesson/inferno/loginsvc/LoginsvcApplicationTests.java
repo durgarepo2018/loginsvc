@@ -21,6 +21,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mckesson.inferno.loginsvc.model.User;
+import com.mckesson.inferno.loginsvc.response.AuthentivationRequest;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -131,11 +132,11 @@ class LoginsvcApplicationTests {
 	@Test
 	public void testAuthUserWithInValidUserName() throws Exception {
 		
-		User userRequest = new User("e3j7qfx_invalid", "password1");
+		AuthentivationRequest authRequest = new AuthentivationRequest("e3j7qfx_invalid", "password1");
 		HttpHeaders httpHeaders = new HttpHeaders();
         mockMvc.perform(post("/authenticate")
         		.accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(userRequest))
+                .contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(authRequest))
                 .headers(httpHeaders))
         		.andExpect(status().isNotFound())
         		.andExpect(jsonPath("$.message", Matchers.is("Incorrect UserName.")));
@@ -145,11 +146,11 @@ class LoginsvcApplicationTests {
 	@Test
 	public void testAuthUserWithInValidpwd() throws Exception {
 		
-		User userRequest = new User("e3j7qfx", "password1_invalid");
+		AuthentivationRequest authRequest = new AuthentivationRequest("e3j7qfx", "password1_invalid");
 		HttpHeaders httpHeaders = new HttpHeaders();
         mockMvc.perform(post("/authenticate")
         		.accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(userRequest))
+                .contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(authRequest))
                 .headers(httpHeaders))
         		.andExpect(status().isNotFound())
         		.andExpect(jsonPath("$.message", Matchers.is("Incorrect Password.")))
@@ -159,11 +160,11 @@ class LoginsvcApplicationTests {
 	@Test
 	public void testAuthUserWithValidReqData() throws Exception {
 		
-		User userRequest = new User("e3j7qfx", "password1");
+		AuthentivationRequest authRequest = new AuthentivationRequest("e3j7qfx", "password1");
 		HttpHeaders httpHeaders = new HttpHeaders();
         mockMvc.perform(post("/authenticate")
         		.accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(userRequest))
+                .contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(authRequest))
                 .headers(httpHeaders))
         		.andExpect(status().isFound())
         		.andExpect(jsonPath("$.authSuccss", Matchers.is("true")));
