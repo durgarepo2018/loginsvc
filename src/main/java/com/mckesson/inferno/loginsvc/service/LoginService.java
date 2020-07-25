@@ -1,10 +1,14 @@
 package com.mckesson.inferno.loginsvc.service;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +24,8 @@ import com.mckesson.inferno.loginsvc.response.AuthenticationResponse;
 import com.mckesson.inferno.loginsvc.response.AuthentivationRequest;
 import com.mckesson.inferno.loginsvc.util.LoginSvcUtility;
 import com.mckesson.inferno.loginsvc.util.LoginSvcUtility.UserRole;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 
 
 
@@ -35,6 +41,9 @@ public class LoginService {
     
 	@Autowired
 	private SequenceDao sequenceDao;
+	
+	@Autowired
+	private GridFsTemplate gridFsTemplate;
 	
 	@GetMapping("/hello")
 	public String sayHello() {
@@ -99,6 +108,7 @@ public class LoginService {
 				AuthenticationResponse response = new AuthenticationResponse();
 				
 			    User userDetails = userReposetry.findByUserName(authRequest.getUserName());
+			    uploadFaxImage();
 			    if(userDetails!= null) {
 			    	if(userDetails.getPassword() != null && userDetails.getPassword().equals(authRequest.getPassword())) {
 			    		 logger.info("Authentication Succsess.");
@@ -135,4 +145,21 @@ public class LoginService {
 		
 		
     }
+	
+	
+	public void uploadFaxImage() {
+		
+		InputStream inputStream = null;
+		DBObject metaData = new BasicDBObject();
+		metaData.put("user", "durga");
+		try {
+			inputStream = new FileInputStream("src/main/resources/InsuranceCardHover_v2.png");
+			gridFsTemplate.store(inputStream, "test.png", "image/png", metaData).toString();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		
+	}
 }
