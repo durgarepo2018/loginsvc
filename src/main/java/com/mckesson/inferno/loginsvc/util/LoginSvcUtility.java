@@ -1,6 +1,7 @@
 package com.mckesson.inferno.loginsvc.util;
 
 import com.mckesson.inferno.loginsvc.model.User;
+import com.mckesson.inferno.loginsvc.response.AuthentivationRequest;
 
 public class LoginSvcUtility {
 
@@ -22,7 +23,7 @@ public class LoginSvcUtility {
 		}
 	}
 	
-	public static boolean isValidAuthRequest(User userRequest) {
+	public static boolean isValidAuthRequest(AuthentivationRequest userRequest) {
 		if(userRequest != null 
 				&& userRequest.getUserName() != null && userRequest.getUserName().trim().length() > 0
 				&& userRequest.getPassword() != null && userRequest.getPassword().trim().length() > 0) {
