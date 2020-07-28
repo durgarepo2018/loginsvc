@@ -132,7 +132,7 @@ class LoginsvcApplicationTests {
 	@Test
 	public void testAuthUserWithInValidUserName() throws Exception {
 		
-		AuthentivationRequest authRequest = new AuthentivationRequest("e3j7qfx_invalid", "password1");
+		AuthentivationRequest authRequest = new AuthentivationRequest("e3j7qfx111", "password3221");
 		HttpHeaders httpHeaders = new HttpHeaders();
         mockMvc.perform(post("/authenticate")
         		.accept(MediaType.APPLICATION_JSON)
@@ -160,7 +160,7 @@ class LoginsvcApplicationTests {
 	@Test
 	public void testAuthUserWithValidReqData() throws Exception {
 		
-		AuthentivationRequest authRequest = new AuthentivationRequest("e3j7qfx", "password1");
+		AuthentivationRequest authRequest = new AuthentivationRequest("e3j7qfx", "cGFzc3dvcmQx");
 		HttpHeaders httpHeaders = new HttpHeaders();
         mockMvc.perform(post("/authenticate")
         		.accept(MediaType.APPLICATION_JSON)

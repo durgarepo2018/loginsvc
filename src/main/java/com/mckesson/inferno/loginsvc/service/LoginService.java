@@ -1,5 +1,6 @@
 package com.mckesson.inferno.loginsvc.service;
 
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
@@ -69,6 +70,8 @@ public class LoginService {
 			if(isValidUserRole) {
 				try 
 				 {
+					String encodedString = Base64.getEncoder().encodeToString(userRequest.getPassword().getBytes());
+					userRequest.setPassword(encodedString);
 				    User userDetails = userReposetry.save(userRequest);
 				    logger.info(" Response Data  :"+userDetails);
 				    return new ResponseEntity<>(userDetails, HttpStatus.CREATED);
@@ -111,9 +114,14 @@ public class LoginService {
 				
 			    User userDetails = userReposetry.findByUserName(authRequest.getUserName());
 			  //  uploadFaxImage();
+			   
 			    if(userDetails!= null) {
+			    	// byte[] decodedBytes = Base64.getDecoder().decode(userDetails.getPassword());
+					// String decodedPwdString = new String(decodedBytes);
+//			    	if(decodedPwdString != null 
+//			    			&& decodedPwdString.equals(authRequest.getPassword())) {
 			    	if(userDetails.getPassword() != null 
-			    			&& userDetails.getPassword().equals(authRequest.getPassword())) {
+				    			&& userDetails.getPassword().equals(authRequest.getPassword())) {
 			    		 logger.info("Authentication Succsess.");
 			    		 response.setAuthSuccss("true");
 			    		 response.setUserName(authRequest.getUserName());
