@@ -38,7 +38,7 @@ public class SwaggerConfig {
 	                "This is a description of your API.",
 	                "version-1",
 	                "API TOS",
-	                "inferno@mckesson.com",
+	                "inferno@inferno.com",
 	                "API License",
 	                "API License URL"
 	        );
